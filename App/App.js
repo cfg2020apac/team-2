@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import Setup from "./app/setup.js";
 import firebase from "firebase";
 
+require('dotenv').config();
+
 export default class App extends Component {
   componentWillMount() {
     const firebaseConfig = {
-      apiKey: "AIzaSyA5-zw5kI4pbFIuCpM5XizgwH1M1ay05fM",
-      authDomain: "new-hope-cs.firebaseapp.com",
-      databaseURL: "https://new-hope-cs.firebaseio.com",
-      projectId: "new-hope-cs",
-      storageBucket: "new-hope-cs.appspot.com",
-      messagingSenderId: "1070221754790",
-      appId: "1:1070221754790:web:f87ec29cc1cbeb7c6ecf67",
-      measurementId: "G-CE03RMT7Q0"
+      apiKey: process.env.FB_API_KEY,
+      authDomain: process.env.FB_AUTH_DOMAIN,
+      databaseURL: process.env.FB_DATABASE_URL,
+      projectId: process.env.FB_PROJECT_ID,
+      storageBucket: process.env.FB_STORAGE_BUCKET,
+      messagingSenderId: process.env.FB_MESSAGING_SENDER_ID,
+      appId: process.env.FB_APP_ID,
+      measurementId: process.env.FB_MEASUREMENT_ID
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
