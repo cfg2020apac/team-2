@@ -50,12 +50,18 @@ export default class DefaultPage extends Component {
   componentDidMount() {
     if (firebase.auth().currentUser && firebase.auth().currentUser.email) {
         email = firebase.auth().currentUser.email;
-        if (email.includes("casemanager")) {
+        if (email) {
             // set the state with firebase authentication
-            var id = email.charAt(11); // LOL
+            //var id = email.charAt(11); // LOL
+            var id = '';
+            if (email.includes("casemanager")) {
+                id = "case_manager/CM000" +  email.charAt(11);
+            } else {
+                id = "social_worker/SW000" + email.charAt(12);
+            }
             console.log(id)
             firebase.database()
-                .ref('case_manager/' + "CM000"  + id)
+                .ref(id)
                 .on('value', snapshot => {
                     let data = snapshot.val() ? snapshot.val(): []
                     this.setState({
