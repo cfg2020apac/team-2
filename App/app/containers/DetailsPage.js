@@ -51,7 +51,9 @@ export default class DetailsPage extends Component {
                         </Text>
                     </Card>
                     <TouchableOpacity onPress={() => {
-                            this.props.navigation.navigate('CaseEvent');
+                            this.props.navigation.navigate('CaseEvent', {
+                                clientDetails: client
+                            });
                     }}>
                         <Card>
                             <Text style={{marginBottom: 10}}>
@@ -62,18 +64,6 @@ export default class DetailsPage extends Component {
                 </View>
             </ScrollView>
         )
-    }
-
-    componentDidMount() {
-        console.log(this.props.navigation);
-        //BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    handleBackButton() {
-    console.log(this.props.navigation);
-    console.log("Hello?");
-        this.props.navigation.pop();
-        return true;
     }
 }
 

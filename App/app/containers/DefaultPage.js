@@ -4,20 +4,88 @@ import {
   SafeAreaView,
   StyleSheet, 
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import { Header, Text, Left, Body, Right, Title, Card, CardItem, Icon, Thumbnail } from "native-base";
 import { Divider } from "react-native-elements";
 import WelcomeBanner from "../components/WelcomeBanner"
+import firebase from 'firebase';
 
 
 export default class DefaultPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
+      clients: [],
+      clients_data: [],
+      key: '',
       isFetching: false
     };
+  }
+
+  async getCMID(email) {
+      var result = '';
+      firebase
+        .database()
+        .ref('cm-casemanager')
+        .on('value', (data) => {
+          const dictionary = data.val();
+          //console.log('data val ' + data.val());
+          const keys = Object.keys(dictionary);
+          //console.log('keys ' + keys);
+          for (let i = 0; i < keys.length; i++) {
+            let k = keys[i];
+            //console.log(dictionary[k] + " " + email);
+            if (dictionary[k] == email) {
+                this.setState({
+                    key: k
+                });
+                console.log(this.state.key);
+            }
+          }
+        });
+  };
+
+  componentDidMount() {
+    if (firebase.auth().currentUser && firebase.auth().currentUser.email) {
+        email = firebase.auth().currentUser.email;
+        if (email.includes("casemanager")) {
+            // set the state with firebase authentication
+            var id = email.charAt(11); // LOL
+            console.log(id)
+            firebase.database()
+                .ref('case_manager/' + "CM000"  + id)
+                .on('value', snapshot => {
+                    let data = snapshot.val() ? snapshot.val(): []
+                    this.setState({
+                        clients: data['clients']
+                    });
+                    console.log(this.state.clients);
+                    // grab clients details
+                    firebase.database()
+                        .ref('client/')
+                        .on('value', snapshot => {
+                            let data = snapshot.val() ? snapshot.val(): {}
+                            console.log(data);
+                            let result = []
+                            var index = 0;
+                            if (!this.state.clients) return;
+                            for (var key in data) {
+                                if (this.state.clients.includes(key)) {
+                                    result[index] = (data[key]);
+                                    result[index]['id'] = key;
+                                    index++;
+                                }
+                            }
+                            this.setState({
+                                clients_data: result
+                            });
+                            console.log(this.state.clients_data);
+                    })
+                })
+        }
+    }
   }
 
   render() {
@@ -46,7 +114,7 @@ export default class DefaultPage extends Component {
       },
     ]
     var clientCards = []
-    for (const client of clients) {
+    for (const client of this.state.clients_data) {
       clientCards.push(
           <TouchableOpacity onPress={() => {
             console.log("Does this happen?");
@@ -69,7 +137,7 @@ export default class DefaultPage extends Component {
       );
     }
     return (
-      <SafeAreaView>
+      <ScrollView>
         <View>
         <Header>
           <Left/>
@@ -97,7 +165,7 @@ export default class DefaultPage extends Component {
           {clientCards}
         </Card>
         </View>
-      </SafeAreaView>
+      </ScrollView>
     );
   }
 }
