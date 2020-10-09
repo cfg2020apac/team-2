@@ -3,12 +3,42 @@ import {
   View,
   SafeAreaView,
   StyleSheet, 
-  TextInput
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Linking
 } from "react-native";
 import { Header, Text, Left, Body, Right, Title, Card, CardItem, Icon, Thumbnail } from "native-base";
 import { Divider } from "react-native-elements";
 import WelcomeBanner from "../components/WelcomeBanner"
+import qs from 'qs';
 
+export async function sendEmail(to, to_two,  subject, body, options = {}) {
+    const { cc, bcc } = options;
+
+    let url = `mailto:${to},${to_two}`;
+
+    // Create email link query
+    const query = qs.stringify({
+        subject: subject,
+        body: body,
+        cc: cc,
+        bcc: bcc
+    });
+
+    if (query.length) {
+        url += `?${query}`;
+    }
+
+    // check if we can use this link
+    const canOpen = await Linking.canOpenURL(url);
+
+    if (!canOpen) {
+        throw new Error('Provided URL can not be handled');
+    }
+
+    return Linking.openURL(url);
+}
 
 export default class DefaultPage extends Component {
   constructor(props) {
@@ -17,15 +47,88 @@ export default class DefaultPage extends Component {
       events: [],
       isFetching: false
     };
+
+    this.acceptOrReject = this.acceptOrReject.bind(this);
+    this.didTapAccept = this.didTapAccept.bind(this);
+  }
+
+  acceptOrReject() {
+    Alert.alert(
+            "Matched Acquired!",
+            "Accept or reject the matching?!",
+            [
+              { text: "Accept", onPress: () =>  {this.didTapAccept()}},
+              { text: "Reject", onPress: () => { console.log("rejected!")}}
+            ],
+            { cancelable: false }
+    );
+  }
+
+  didTapAccept() {
+  var matches = [[
+        {
+          "id": "20",
+          "name": "Jill",
+          "age": 20,
+          "income": 1000,
+          "email": "jill@gmail.com",
+          "found_job": true,
+          "cases": [
+            "case_id_1",
+          ],
+          "status": 1,
+        },
+        {
+          "id": "2",
+          "name": "Wei Jie",
+          "age": 20,
+          "income": 500,
+          "email": "behweichen@gmail.com",
+          "found_job": false,
+          "cases": [
+            "case_id_2",
+          ],
+          "status": 2,
+        },],
+        [
+          {
+            "id": "3",
+            "name": "Bobby",
+            "age": 10,
+            "income": 1000,
+            "email": "bobby@gmail.com",
+            "found_job": true,
+            "cases": [
+              "case_id_3",
+            ],
+            "status": 3,
+          },
+          {
+            "id": "15",
+            "name": "Jack",
+            "age": 20,
+            "income": 500,
+            "email": "jack@gmail.com",
+            "found_job": false,
+            "cases": [
+              "case_id_4",
+            ],
+            "status": 4,
+          },],
+      ]
+    sendEmail(matches[0][0]['email'], matches[0][1]['email'] , "To whomever it may concern, \nWe offer you a flatmate!" ,"Matched Received!").then(() => {
+        console.log("it worked!");
+    })
   }
 
   render() {
     var matches = [[
       {
-        "id": "client_id_1",
-        "name": "client_name_1", 
-        "age": 10, 
-        "income": 1000, 
+        "id": "20",
+        "name": "Jill",
+        "age": 20,
+        "income": 1000,
+        "email": "jill@gmail.com",
         "found_job": true, 
         "cases": [
           "case_id_1",
@@ -33,10 +136,11 @@ export default class DefaultPage extends Component {
         "status": 1, 
       },
       {
-        "id": "client_id_2",
-        "name": "client_name_2", 
+        "id": "2",
+        "name": "Wei Jie",
         "age": 20, 
-        "income": 500, 
+        "income": 500,
+        "email": "behweichen@gmail.com",
         "found_job": false, 
         "cases": [
           "case_id_2",
@@ -45,10 +149,11 @@ export default class DefaultPage extends Component {
       },],
       [
         {
-          "id": "client_id_3",
-          "name": "client_name_3", 
+          "id": "3",
+          "name": "Bobby",
           "age": 10, 
-          "income": 1000, 
+          "income": 1000,
+          "email": "bobby@gmail.com",
           "found_job": true, 
           "cases": [
             "case_id_3",
@@ -56,10 +161,11 @@ export default class DefaultPage extends Component {
           "status": 3, 
         },
         {
-          "id": "client_id_4",
-          "name": "client_name_4", 
+          "id": "15",
+          "name": "Jack",
           "age": 20, 
-          "income": 500, 
+          "income": 500,
+          "email": "jack@gmail.com",
           "found_job": false, 
           "cases": [
             "case_id_4",
@@ -70,7 +176,7 @@ export default class DefaultPage extends Component {
     var matchCards = []
     for (const match of matches) {
       matchCards.push(
-        <View>
+        <TouchableOpacity onPress={this.acceptOrReject}>
             <CardItem key={match[0].id}>
                 {/* onPress={()=> {
                     this.props.navigation.navigate('<Page Name>', {
@@ -93,7 +199,7 @@ export default class DefaultPage extends Component {
                 </View>
             </CardItem>
             <Divider/>
-        </View>
+        </TouchableOpacity>
       );
     }
     return (
