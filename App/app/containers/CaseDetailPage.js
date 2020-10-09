@@ -8,16 +8,44 @@ import {
 import { Header, Text, Left, Body, Right, Title, Card, CardItem, Icon, Thumbnail } from "native-base";
 import { Divider } from "react-native-elements";
 import WelcomeBanner from "../components/WelcomeBanner"
-
+import firebase from 'firebase'
 
 export default class CaseDetailPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
+      cases: [],
+      cases_details: [],
       isFetching: false
     };
   }
+
+   componentDidMount() {
+       const { navigation } = this.props;
+       client_id = navigation.getParam('clientDetails')['id'];
+       console.log(client_id)
+       firebase.database()
+           .ref('case/')
+           .on('value', snapshot => {
+               let data = snapshot.val() ? snapshot.val() : {};
+               console.log(data);
+               this.setState({
+                   cases: data
+               });
+               var result = []
+               var index = 0;
+               for (var key in data) {
+                    if (data[key]['client_id'] == client_id) {
+                        result[index] = data[key];
+                        index++;
+                    }
+               }
+               this.setState({
+                    cases_details: result
+               });
+               console.log(this.state.cases_details);
+           })
+   }
 
   render() {
     var clients = [
@@ -41,7 +69,7 @@ export default class CaseDetailPage extends Component {
       },
     ]
     var clientCards = []
-    for (const client of clients) {
+    for (const client of this.state.cases_details) {
       clientCards.push(
           <View>
         <CardItem key={client.id}>
@@ -53,7 +81,8 @@ export default class CaseDetailPage extends Component {
           <Body>
             <Text>Case id: {client.case_id}</Text>
             <Text>Title: {client.title}</Text>
-            <Text>Date: {client.timestamp}</Text>
+            <Text>Date: {client.date}</Text>
+            <Text>{client.description}</Text>
           </Body>
         </CardItem>
         <Divider/>
