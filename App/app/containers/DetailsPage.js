@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView,  SafeAreaView, StyleSheet, Image, Dimensions, BackHandler} from 'react-native';
+import { View, ScrollView,  SafeAreaView, StyleSheet, Image, Dimensions, BackHandler, TouchableOpacity} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import { Container, Text, Header, Left, Body, Right, Title } from "native-base";
 import CardSection from "../components/CardSection";
@@ -51,12 +51,15 @@ export default class DetailsPage extends Component {
                             {"Age: " + client["age"]}
                         </Text>
                     </Card>
-                    <Card>
-                        <Text style={{marginBottom: 10}}>
-                            Case Notes
-                        </Text>
-
-                    </Card>
+                    <TouchableOpacity onPress={() => {
+                            this.props.navigation.navigate('CaseEvent');
+                    }}>
+                        <Card>
+                            <Text style={{marginBottom: 10}}>
+                                Case Notes
+                            </Text>
+                        </Card>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         )
