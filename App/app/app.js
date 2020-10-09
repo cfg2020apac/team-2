@@ -6,7 +6,10 @@ import {
   StyleSheet,
   AsyncStorage
 } from "react-native";
-import AdminHomePage from "./containers/AdminHomePage";
+// import AdminHomePage from "./containers/AdminHomePage";
+// import DefaultPage from "./containers/DefaultPage";
+// import CaseDetailPage from "./containers/CaseDetailPage";
+import MatchingPage from "./containers/MatchingPage";
 
 import DrawerNavigator from "./managers/DrawerNavigator";
 import {
@@ -14,16 +17,16 @@ import {
   createAppContainer,
   createStackNavigator
 } from "react-navigation";
-import Login from "./components/Login";
+// import Login from "./components/Login";
 import CreateEvent from "./containers/CreateEvent";
 import ViewEvent from "./containers/SignedUpEventsPage";
 
 const root = createSwitchNavigator({
-  Login: {
-    screen: Login
-  },
+  // Login: {
+  //   screen: Login
+  // },
   Admin: {
-    screen: AdminHomePage
+    screen: MatchingPage
   },
   CreateEvent: {
     screen: CreateEvent
@@ -34,7 +37,7 @@ const root = createSwitchNavigator({
   default: DrawerNavigator
 });
 
-const AuthStack = createStackNavigator({ LoginPage: Login });
+// const AuthStack = createStackNavigator({ LoginPage: Login });
 
 class AuthLoadingScreen extends Component {
   constructor(props) {
@@ -79,10 +82,10 @@ const Application = createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       App: DrawerNavigator,
-      Auth: AuthStack
+      // Auth: AuthStack
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "App"
     }
   )
 );
