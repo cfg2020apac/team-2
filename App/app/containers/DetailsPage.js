@@ -5,7 +5,6 @@ import { Container, Text, Header, Left, Body, Right, Title } from "native-base";
 import CardSection from "../components/CardSection";
 import SignedUpEvent from "../components/SignedUpEvent";
 import firebase from "firebase";
-import ProfilePicture from 'react-native-profile-picture';
 
 export default class DetailsPage extends Component {
     constructor(props) {
