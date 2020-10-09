@@ -6,6 +6,8 @@ import {
   TextInput
 } from "react-native";
 import { Header, Text, Left, Body, Right, Title, Card, CardItem, Icon, Thumbnail } from "native-base";
+import { Divider } from "react-native-elements";
+import WelcomeBanner from "../components/WelcomeBanner"
 
 
 export default class DefaultPage extends Component {
@@ -45,6 +47,7 @@ export default class DefaultPage extends Component {
     var clientCards = []
     for (const client of clients) {
       clientCards.push(
+          <View>
         <CardItem key={client.id}>
           {/* onPress={()=> {
             this.props.navigation.navigate('<Page Name>', {
@@ -60,6 +63,8 @@ export default class DefaultPage extends Component {
             <Text>Status: {client.status}</Text>
           </Body>
         </CardItem>
+        <Divider/>
+        </View>
       );
     }
     return (
@@ -74,24 +79,7 @@ export default class DefaultPage extends Component {
             <Icon name="notifications"/>
           </Right>
         </Header>
-        <Card>
-          <CardItem>
-            <Left style={{flex:0.3}}>
-              <Thumbnail source={{ uri: 'https://discourse.disneyheroesgame.com/uploads/default/original/3X/b/c/bcf55fc88779cd2a15eec21e62328b1c69049a7f.png' }} />
-            </Left>
-            <Body>
-              <Text>
-                Welcome!
-              </Text>
-              <Text>
-                Casey Manger
-              </Text>
-              <Text>
-                Case Manager
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
+        <WelcomeBanner/>
         <Card>
           <CardItem>
             <Body>
