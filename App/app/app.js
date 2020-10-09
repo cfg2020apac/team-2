@@ -9,7 +9,7 @@ import {
 
 import AdminHomePage from "./containers/AdminHomePage";
 import DefaultPage from "./containers/DefaultPage";
-// import CaseDetailPage from "./containers/CaseDetailPage";
+import CaseDetailPage from "./containers/CaseDetailPage";
 import MatchingPage from "./containers/MatchingPage";
 
 import DrawerNavigator from "./managers/DrawerNavigator";
@@ -25,6 +25,10 @@ import ViewEvent from "./containers/SignedUpEventsPage";
 import DetailEvent from "./containers/DetailsPage";
 
 const root = createStackNavigator({
+ Login: {
+    screen: Login
+  },
+
   Admin: {
       screen: DefaultPage,
       navigationOptions: {
@@ -33,16 +37,16 @@ const root = createStackNavigator({
       },
   },
 
-  Login: {
-    screen: Login
-  },
-
   CreateEvent: {
     screen: CreateEvent
   },
 
-  ViewEvent: {
-    screen: ViewEvent
+  CaseEvent: {
+    screen: CaseDetailPage,
+    navigationOptions: {
+        title: 'Home',
+        header: null //this will hide the header
+    },
   },
 
   DetailEvent: {
