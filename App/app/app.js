@@ -6,7 +6,11 @@ import {
   StyleSheet,
   AsyncStorage
 } from "react-native";
+
 import AdminHomePage from "./containers/AdminHomePage";
+import DefaultPage from "./containers/DefaultPage";
+// import CaseDetailPage from "./containers/CaseDetailPage";
+import MatchingPage from "./containers/MatchingPage";
 
 import DrawerNavigator from "./managers/DrawerNavigator";
 import {
@@ -14,27 +18,41 @@ import {
   createAppContainer,
   createStackNavigator
 } from "react-navigation";
+
 import Login from "./components/Login";
 import CreateEvent from "./containers/CreateEvent";
 import ViewEvent from "./containers/SignedUpEventsPage";
 import DetailEvent from "./containers/DetailsPage";
 
-const root = createSwitchNavigator({
-  DetailEvent: {
-    screen: DetailEvent
+const root = createStackNavigator({
+  Admin: {
+      screen: DefaultPage,
+      navigationOptions: {
+          title: 'Home',
+          header: null //this will hide the header
+      },
   },
+
   Login: {
     screen: Login
   },
-  Admin: {
-    screen: AdminHomePage
-  },
+
   CreateEvent: {
     screen: CreateEvent
   },
+
   ViewEvent: {
     screen: ViewEvent
   },
+
+  DetailEvent: {
+      screen: DetailEvent,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      },
+   },
+
   /*
   DetailEvent: {
     screen: DetailEvent
@@ -42,7 +60,7 @@ const root = createSwitchNavigator({
   default: DrawerNavigator
 });
 
-const AuthStack = createStackNavigator({ LoginPage: Login });
+// const AuthStack = createStackNavigator({ LoginPage: Login });
 
 class AuthLoadingScreen extends Component {
   constructor(props) {
@@ -87,10 +105,10 @@ const Application = createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       App: DrawerNavigator,
-      Auth: AuthStack
+      // Auth: AuthStack
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "App"
     }
   )
 );

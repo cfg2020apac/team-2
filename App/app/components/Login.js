@@ -56,7 +56,7 @@ export default class Login extends Component {
         if (username === "admin@u.nus.edu" && password === "password") {
           this.props.navigation.navigate("Admin");
         } else {
-          this.props.navigation.navigate("DetailEvent");
+          this.props.navigation.navigate("Admin");
         }
       })
       .catch(this.onLoginFail.bind(this));

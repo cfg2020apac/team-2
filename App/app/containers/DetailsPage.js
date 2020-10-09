@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView,  SafeAreaView, StyleSheet, Image, Dimensions} from 'react-native';
+import { View, ScrollView,  SafeAreaView, StyleSheet, Image, Dimensions, BackHandler} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
-import { Container, Text } from "native-base";
+import { Container, Text, Header, Left, Body, Right, Title } from "native-base";
 import CardSection from "../components/CardSection";
 import SignedUpEvent from "../components/SignedUpEvent";
 import firebase from "firebase";
@@ -10,29 +10,45 @@ import ProfilePicture from 'react-native-profile-picture';
 export default class DetailsPage extends Component {
     constructor(props) {
         super(props);
+        const { navigation } = this.props;
+        console.log(navigation.getParam('clientDetails'))
+        this.setState({
+             userDetails: navigation.getParam('clientDetails')
+        })
         this.state = {
-          userDetails: []
+          userDetails: [],
         };
     }
 
     render() {
+        const { navigation } = this.props;
+        let client = navigation.getParam('clientDetails');
         return (
             <ScrollView>
+                <Header>
+                      <Left/>
+                      <Body>
+                        <Title>Header</Title>
+                      </Body>
+                      <Right>
+                        <Icon name="notifications"/>
+                      </Right>
+                </Header>
                 <View style={styles.container}>
                     <Image style={styles.profilePicture} resizeMode={"cover"} source={require('../assets/images/guy1.jpg')} />
                     <Card>
                         <Text style={{marginBottom: 10}}>
-                            {"Name: " + this.state.userDetails["name"]}
+                            {"Name: " + client["name"]}
                         </Text>
                     </Card>
                     <Card>
                         <Text style={{marginBottom: 10}}>
-                            {"Income: " + this.state.userDetails["income"]}
+                            {"Income: " + client["income"]}
                         </Text>
                     </Card>
                     <Card>
                         <Text style={{marginBottom: 10}}>
-                            {"Age: " + this.state.userDetails["age"]}
+                            {"Age: " + client["age"]}
                         </Text>
                     </Card>
                     <Card>
@@ -47,23 +63,23 @@ export default class DetailsPage extends Component {
     }
 
     componentDidMount() {
-        firebase
-            .database()
-            .ref('client/1')
-            .on('value', snapshot => {
-                let data = snapshot.val() ? snapshot.val() : {};
-                console.log(data);
-                this.setState({
-                    userDetails: data
-                });
-        })
+        console.log(this.props.navigation);
+        //BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+    console.log(this.props.navigation);
+    console.log("Hello?");
+        this.props.navigation.pop();
+        return true;
     }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    marginTop: "1%"
   },
   profilePicture: {
     height: 200,
