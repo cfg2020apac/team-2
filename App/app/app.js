@@ -17,8 +17,12 @@ import {
 import Login from "./components/Login";
 import CreateEvent from "./containers/CreateEvent";
 import ViewEvent from "./containers/SignedUpEventsPage";
+import DetailEvent from "./containers/DetailsPage";
 
 const root = createSwitchNavigator({
+  DetailEvent: {
+    screen: DetailEvent
+  },
   Login: {
     screen: Login
   },
@@ -31,6 +35,10 @@ const root = createSwitchNavigator({
   ViewEvent: {
     screen: ViewEvent
   },
+  /*
+  DetailEvent: {
+    screen: DetailEvent
+  },*/  // add this later
   default: DrawerNavigator
 });
 
