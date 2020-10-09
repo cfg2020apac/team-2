@@ -57,11 +57,13 @@ const root = createStackNavigator({
       },
    },
 
-  /*
-  DetailEvent: {
-    screen: DetailEvent
-  },*/  // add this later
-  default: DrawerNavigator
+  default: {
+      screen: DrawerNavigator,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      }
+  }
 });
 
 // const AuthStack = createStackNavigator({ LoginPage: Login });
