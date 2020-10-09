@@ -7,8 +7,10 @@ import {
 } from "react-native";
 import { Header, Text, Left, Body, Right, Title, Card, CardItem, Icon, Thumbnail } from "native-base";
 import { Divider } from "react-native-elements";
-import WelcomeBanner from "../components/WelcomeBanner"
-import firebase from 'firebase'
+import WelcomeBanner from "../components/WelcomeBanner";
+import firebase from 'firebase';
+import Button from "../components/Button";
+import CardSection from "../components/CardSection";
 
 export default class CaseDetailPage extends Component {
   constructor(props) {
@@ -79,7 +81,6 @@ export default class CaseDetailPage extends Component {
             })
           }}> */}
           <Body>
-            <Text>Case id: {client.case_id}</Text>
             <Text>Title: {client.title}</Text>
             <Text>Date: {client.date}</Text>
             <Text>{client.description}</Text>
@@ -89,6 +90,8 @@ export default class CaseDetailPage extends Component {
         </View>
       );
     }
+    const { navigation } = this.props;
+    clientDetails = navigation.getParam('clientDetails');
     return (
       <SafeAreaView>
         <View>
@@ -117,7 +120,11 @@ export default class CaseDetailPage extends Component {
         <Card>
           {clientCards}
         </Card>
+        <CardSection>
+            <Button onPress={() => this.props.navigation.navigate('AddCaseEvent', {clientDetails: clientDetails})}> Add Case Notes </Button>
+        </CardSection>
         </View>
+
       </SafeAreaView>
     );
   }

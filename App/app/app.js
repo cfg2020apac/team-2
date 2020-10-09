@@ -23,6 +23,7 @@ import Login from "./components/Login";
 import CreateEvent from "./containers/CreateEvent";
 import ViewEvent from "./containers/SignedUpEventsPage";
 import DetailEvent from "./containers/DetailsPage";
+import AddCasePage from "./containers/AddCasePage";
 
 const root = createStackNavigator({
  Login: {
@@ -51,6 +52,14 @@ const root = createStackNavigator({
 
   DetailEvent: {
       screen: DetailEvent,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      },
+   },
+
+   AddCaseEvent: {
+      screen: AddCasePage,
       navigationOptions: {
             title: 'Home',
             header: null //this will hide the header
