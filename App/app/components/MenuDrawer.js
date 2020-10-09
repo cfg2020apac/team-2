@@ -29,7 +29,7 @@ export default class MenuDrawer extends Component {
       <View style={styles.container}>
         <View style={styles.topLinks}>
           <Image
-            source={require("../assets/images/CAPT_logo.png")}
+            source={require("../assets/images/H4G.png")}
             style={{
               width: WIDTH * 0.65,
               flex: 1,
@@ -39,8 +39,7 @@ export default class MenuDrawer extends Component {
         </View>
         <View style={styles.bottomLinks}>
           {this.naviLink("Home", "Home")}
-          {this.naviLink("Facilities & Equipments", "Facilities & Equipments")}
-          {this.naviLink("General Matters & FAQ", "General Matters & FAQ")}
+          {this.naviLink("Matches", "Matches")}
           {this.naviLink("Settings", "Settings")}
         </View>
       </View>
@@ -51,14 +50,14 @@ export default class MenuDrawer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#74273F"
+    backgroundColor: "#FFFFFF"
   },
   topLinks: {
     height: HEIGHT * 0.25
   },
   bottomLinks: {
     flex: 1,
-    backgroundColor: "#74273F",
+    backgroundColor: "#FFFFFF",
     paddingTop: 10,
     paddingBottom: 450
   },

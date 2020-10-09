@@ -6,7 +6,11 @@ import {
   StyleSheet,
   AsyncStorage
 } from "react-native";
+
 import AdminHomePage from "./containers/AdminHomePage";
+import DefaultPage from "./containers/DefaultPage";
+import CaseDetailPage from "./containers/CaseDetailPage";
+import MatchingPage from "./containers/MatchingPage";
 
 import DrawerNavigator from "./managers/DrawerNavigator";
 import {
@@ -14,27 +18,73 @@ import {
   createAppContainer,
   createStackNavigator
 } from "react-navigation";
+
 import Login from "./components/Login";
 import CreateEvent from "./containers/CreateEvent";
 import ViewEvent from "./containers/SignedUpEventsPage";
+import DetailEvent from "./containers/DetailsPage";
+import AddCasePage from "./containers/AddCasePage";
+import RequestsPage from "./containers/RequestsPage";
 
-const root = createSwitchNavigator({
-  Login: {
+const root = createStackNavigator({
+ Login: {
     screen: Login
   },
+
   Admin: {
-    screen: AdminHomePage
+      screen: DefaultPage,
+      navigationOptions: {
+          title: 'Home',
+          header: null //this will hide the header
+      },
   },
+
   CreateEvent: {
     screen: CreateEvent
   },
-  ViewEvent: {
-    screen: ViewEvent
+
+  CaseEvent: {
+    screen: CaseDetailPage,
+    navigationOptions: {
+        title: 'Home',
+        header: null //this will hide the header
+    },
   },
-  default: DrawerNavigator
+
+  DetailEvent: {
+      screen: DetailEvent,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      },
+   },
+
+   AddCaseEvent: {
+      screen: AddCasePage,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      },
+   },
+
+   RequestsEvent: {
+      screen: RequestsPage,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      },
+   },
+
+  default: {
+      screen: DrawerNavigator,
+      navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+      }
+  }
 });
 
-const AuthStack = createStackNavigator({ LoginPage: Login });
+// const AuthStack = createStackNavigator({ LoginPage: Login });
 
 class AuthLoadingScreen extends Component {
   constructor(props) {
@@ -79,10 +129,10 @@ const Application = createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       App: DrawerNavigator,
-      Auth: AuthStack
+      // Auth: AuthStack
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "App"
     }
   )
 );

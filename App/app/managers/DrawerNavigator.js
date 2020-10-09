@@ -7,6 +7,8 @@ import FacilitiesScreen from "../containers/FacilitiesScreen";
 import FAQScreen from "../containers/FAQScreen";
 import SettingsScreen from "../containers/SettingsScreen";
 import MenuDrawer from "../components/MenuDrawer";
+import DefaultPage from "../containers/DefaultPage";
+import MatchingPage from "../containers/MatchingPage";
 
 const WIDTH = Dimensions.get("window").width;
 
@@ -14,19 +16,28 @@ const DrawerConfig = {
   drawerWidth: WIDTH * 0.65,
   contentComponent: ({ navigation }) => {
     return <MenuDrawer navigation={navigation} />;
+  },
+  navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
   }
 };
 
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: DefaultPage,
+      navigationOptions: {
+          title: 'Home',
+          header: null //this will hide the header
+      },
     },
-    "Facilities & Equipments": {
-      screen: FacilitiesScreen
-    },
-    "General Matters & FAQ": {
-      screen: FAQScreen
+    Matches: {
+        screen: MatchingPage,
+        navigationOptions: {
+            title: 'Home',
+            header: null //this will hide the header
+        }
     },
     Settings: {
       screen: SettingsScreen

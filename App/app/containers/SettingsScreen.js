@@ -22,9 +22,6 @@ export default class SettingsScreen extends Component {
   render() {
     return (
       <Container>
-        <View>
-          <MyHeader navigation={this.props.navigation} />
-        </View>
         <Card>
           <CardSection
             style={{
@@ -48,11 +45,6 @@ export default class SettingsScreen extends Component {
           </CardSection>
           <CardSection>
             <Button>Edit Security Settings</Button>
-          </CardSection>
-          <CardSection>
-            <Button onPress={() => this.props.navigation.navigate("ViewEvent")}>
-              View Signed-Up Events
-            </Button>
           </CardSection>
           <CardSection>
             <Button onPress={this.logOut.bind(this)}> Log Out </Button>
