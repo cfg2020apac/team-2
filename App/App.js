@@ -5,13 +5,14 @@ import firebase from "firebase";
 export default class App extends Component {
   componentWillMount() {
     const firebaseConfig = {
-      apiKey: "AIzaSyCLBaMaq2iCIw-0qMPnAQjM-1lOJWcrSKE",
-      authDomain: "nus-home.firebaseapp.com",
-      databaseURL: "https://nus-home.firebaseio.com",
-      projectId: "nus-home",
-      storageBucket: "",
-      messagingSenderId: "489089414375",
-      appId: "1:489089414375:web:434d7d3e3d64bc94"
+      apiKey: "AIzaSyA5-zw5kI4pbFIuCpM5XizgwH1M1ay05fM",
+      authDomain: "new-hope-cs.firebaseapp.com",
+      databaseURL: "https://new-hope-cs.firebaseio.com",
+      projectId: "new-hope-cs",
+      storageBucket: "new-hope-cs.appspot.com",
+      messagingSenderId: "1070221754790",
+      appId: "1:1070221754790:web:f87ec29cc1cbeb7c6ecf67",
+      measurementId: "G-CE03RMT7Q0"
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
