@@ -17,10 +17,15 @@ yarn-error.log
 
 # Android/IntelliJ
 build/
+.settings/
 .idea
 .gradle
 local.properties
 *.iml
 
+# VSC
+.vscode/
+
 # configurations
 .env
+
