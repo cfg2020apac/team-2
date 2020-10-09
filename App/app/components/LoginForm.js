@@ -12,7 +12,7 @@ export default class LoginForm extends Component {
     return (
       <View>
         <TextInput
-          placeholder="NUSNET ID"
+          placeholder="Email"
           style={styles.input}
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}
