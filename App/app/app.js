@@ -67,14 +67,6 @@ const root = createStackNavigator({
       },
    },
 
-   RequestsEvent: {
-      screen: RequestsPage,
-      navigationOptions: {
-            title: 'Home',
-            header: null //this will hide the header
-      },
-   },
-
   default: {
       screen: DrawerNavigator,
       navigationOptions: {

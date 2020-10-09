@@ -9,6 +9,7 @@ import SettingsScreen from "../containers/SettingsScreen";
 import MenuDrawer from "../components/MenuDrawer";
 import DefaultPage from "../containers/DefaultPage";
 import MatchingPage from "../containers/MatchingPage";
+import RequestsPage from "../containers/RequestsPage";
 
 const WIDTH = Dimensions.get("window").width;
 
@@ -38,6 +39,13 @@ const DrawerNavigator = createDrawerNavigator(
             title: 'Home',
             header: null //this will hide the header
         }
+    },
+    RequestsEvent: {
+          screen: RequestsPage,
+          navigationOptions: {
+                title: 'Home',
+                header: null //this will hide the header
+          }
     },
     Settings: {
       screen: SettingsScreen
