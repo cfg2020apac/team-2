@@ -8,8 +8,11 @@ import {
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from "react-native";
+
+var device_width = Dimensions.get("window").width;
 
 export default class Login extends Component {
   constructor(props) {
@@ -45,7 +48,6 @@ export default class Login extends Component {
 
   _login() {
     let { username, password, loading } = this.state;
-    username += "@u.nus.edu";
     this.setState({ loading: true });
     firebase
       .auth()
@@ -66,7 +68,7 @@ export default class Login extends Component {
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
-            source={require("../assets/images/NUSHOME_logo5.png")}
+            source={require("../assets/images/H4G.png")}
           />
           <Text style={styles.motto}>ENHANCING YOUR </Text>
           <Text style={styles.motto2}>CAMPUS LIFE</Text>
@@ -100,10 +102,11 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#003D7C"
+    backgroundColor: "#FFFFFF"
   },
   logo: {
     top: "5%",
+    flex: 1,
     width: 200,
     height: 200,
     resizeMode: "contain"
@@ -135,18 +138,20 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: "white",
+    backgroundColor: "#D3D3D3",
     marginBottom: 10,
     color: "black",
     paddingHorizontal: 10,
     textAlign: "center"
   },
   buttonContainer: {
-    backgroundColor: "#EF7C00",
+    backgroundColor: "white",
     paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: "row",
+    borderColor: 'grey',
+    borderWidth: 0.45
   },
   buttonText: {
     color: "black",
