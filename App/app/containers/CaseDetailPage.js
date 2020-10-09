@@ -10,7 +10,7 @@ import { Divider } from "react-native-elements";
 import WelcomeBanner from "../components/WelcomeBanner"
 
 
-export default class DefaultPage extends Component {
+export default class CaseDetailPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
