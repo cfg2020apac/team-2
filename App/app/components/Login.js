@@ -78,7 +78,7 @@ export default class Login extends Component {
         </View>
         <View style={styles.formContainer}>
           <TextInput
-            placeholder="NUSNET ID"
+            placeholder="Email"
             style={styles.input}
             returnKeyType="next"
             onChangeText={username => this.setState({ username })}
