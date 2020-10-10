@@ -56,8 +56,7 @@ export default class RequestsPage extends Component {
                 <Thumbnail source={{ uri: 'https://img.tapimg.com/market/lcs/ba1c796fc180a9a2ea9a3105530f35ee_360.png?imageMogr2/auto-orient/strip' }} />
               </Left>
               <Body>
-                <Text>Name: {client.name}</Text>
-                <Text>Client id: {client.id}</Text>
+                <Text>Client id: {client.clients}</Text>
                 <Text>Status: {client.status}</Text>
               </Body>
             </CardItem>
