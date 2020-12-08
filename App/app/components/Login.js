@@ -53,7 +53,7 @@ export default class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(username, password)
       .then(user => {
-        if (username === "admin@u.nus.edu" && password === ) {
+        if (username === "admin@u.nus.edu" && password === "") {
           this.props.navigation.navigate("Admin");
         } else if (username.includes("casemanager") || username.includes("socialworker")) {
           this.props.navigation.navigate("Home");
